@@ -1,7 +1,7 @@
 const operatorSet = new Set(["+", "-", "x", "/", "="]);
 let expressionArray = [];
 let numString = "";
-let answer = 0;
+//let answer = 0;
 const buttons = document.querySelectorAll("button");
 
  buttons.forEach(function (button) {
@@ -73,6 +73,7 @@ function convertNumStringToNum() {
 }
 
 function calculate(num1, operator, num2) {
+  let answer = 0;
   switch (operator) {
     case "+":
       answer = num1 + num2;
@@ -96,8 +97,9 @@ function calculate(num1, operator, num2) {
 }
 
 function replace(answer, i) {
-  expressionArray.splice(i, 2);
-  expressionArray[i - 1] = answer;
+ let answer = 0;
+ expressionArray.splice(i, 2);
+ expressionArray[i - 1] = answer;
 }
 
 function clearOutputBox() {
