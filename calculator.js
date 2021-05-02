@@ -1,3 +1,4 @@
+//uncaught syntax error - answer has already been declared
 const operatorSet = new Set(["+", "-", "x", "/", "="]);
 let expressionArray = [];
 let numString = "";
@@ -101,7 +102,7 @@ function replace(answer, i) {
 console.log("i comes in as "+ i);
   expressionArray.splice(i, 2);
 console.log("i-1 is " + i-1);
-  expressionArray[i-1] = answer;
+  expressionArray[i-1] = answerCalc;
 }
 
 function clearOutputBox() {
