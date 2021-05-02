@@ -1,12 +1,15 @@
 const operatorSet = new Set(["+", "-", "x", "/", "="]);
 let expressionArray = [];
 let numString = "";
-//let answer = 0;
+let answer = 0;
 const buttons = document.querySelectorAll("button");
 
  buttons.forEach(function (button) {
   button.addEventListener("click", storeNum);
 });
+
+/*taskListItem.addEventListener("contextmenu", (e) => { 
+  e.preventDefault();*/
 
 function storeNum(event) {
   //event.preventDefault();
@@ -30,7 +33,7 @@ function storeNum(event) {
   if (n == "=") {
     multDiv();
     addSubt();
-    //lastExpression();
+    lastExpression();
   }
 }
 
@@ -43,7 +46,6 @@ function multDiv() {
       convertNumStringToNum();
     }
   }
-  document.getElementById("output-box").value = answer;
 }
 
 function addSubt() {
@@ -54,8 +56,7 @@ function addSubt() {
     if (expressionArray[i] == "-") {
       convertNumStringToNum();
     }
-  } 
-  document.getElementById("output-box").value = answer;
+  }
 }
 
 function lastExpression() {
@@ -65,7 +66,7 @@ function lastExpression() {
   answer = calculate(num1, operator, num2);
 }
 
-function convertNumStringToNum() {
+function convertNumStringToNum() {  
   num1 = parseFloat(expressionArray[i - 1]);
   operator = expressionArray[i];
   num2 = parseFloat(expressionArray[i + 1]);
@@ -73,7 +74,6 @@ function convertNumStringToNum() {
 }
 
 function calculate(num1, operator, num2) {
-  let answer = 0;
   switch (operator) {
     case "+":
       answer = num1 + num2;
@@ -89,17 +89,19 @@ function calculate(num1, operator, num2) {
 
     case "/":
       answer = num1 / num2;
+  replace(answer, i);    
   }
-
-  replace(answer, i);
-  //document.getElementById("output-box").value = answer;
-  return answer;
+console.log(answer);
+ // replace(answer, i);
+ console.log("array is " + expressionArray);
+  document.getElementById("output-box").value = answer;
 }
 
 function replace(answer, i) {
- let answer = 0;
- expressionArray.splice(i, 2);
- expressionArray[i - 1] = answer;
+console.log("i comes in as "+ i);
+  expressionArray.splice(i, 2);
+console.log("i-1 is " + i-1);
+  expressionArray[i-1] = answer;
 }
 
 function clearOutputBox() {
@@ -107,3 +109,4 @@ function clearOutputBox() {
   expressionArray = [];
   numString = "";
 }
+
