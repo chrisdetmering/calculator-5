@@ -43,6 +43,7 @@ function multDiv() {
       convertNumStringToNum();
     }
   }
+  document.getElementById("output-box").value = answer;
 }
 
 function addSubt() {
@@ -53,7 +54,8 @@ function addSubt() {
     if (expressionArray[i] == "-") {
       convertNumStringToNum();
     }
-  }
+  } 
+  document.getElementById("output-box").value = answer;
 }
 
 function lastExpression() {
@@ -89,7 +91,8 @@ function calculate(num1, operator, num2) {
   }
 
   replace(answer, i);
-  document.getElementById("output-box").value = answer;
+  //document.getElementById("output-box").value = answer;
+  return answer;
 }
 
 function replace(answer, i) {
