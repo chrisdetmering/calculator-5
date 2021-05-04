@@ -4,8 +4,9 @@ let expressionArray = [];
 let numString = "";
 let answer = 0;
 const buttons = document.querySelectorAll("button");
+const outputBox = document.getElementById("output-box");
 
- buttons.forEach(function (button) {
+buttons.forEach(function (button) {
   button.addEventListener("click", storeNum);
 });
 
@@ -22,87 +23,61 @@ function storeNum(event) {
 
   if (!operatorSet.has(n)) {
     numString = numString + n;
-    document.getElementById("output-box").value = numString;  
+    console.log("number: ", numString);
+    console.log(expressionArray);
   }
 
   if (operatorSet.has(n)) {
     expressionArray.push(numString);
     expressionArray.push(n);
     numString = "";
+    console.log("operator: ", n);
+    console.log("expressionArray: ", expressionArray);
   }
-
-  if (n == "=") {
-    multDiv();
-    addSubt();
+  outputBox.value = numString;
+  if (typeof expressionArray[2] !== "undefined") {
+    lastExpression();
+  } else if (n == "=") {
     lastExpression();
   }
 }
 
-function multDiv() {
-  for (i = 0; i <= expressionArray.length; i++) {
-    if (expressionArray[i] == "x") {
-      convertNumStringToNum();
-    }
-    if (expressionArray[i] == "/") {
-      convertNumStringToNum();
-    }
-  }
-}
-
-function addSubt() {
-  for (i = 0; i <= expressionArray.length; i++) {
-    if (expressionArray[i] == "+") {
-      convertNumStringToNum();
-    }
-    if (expressionArray[i] == "-") {
-      convertNumStringToNum();
-    }
-  }
-}
-
 function lastExpression() {
+  //check if expressionArray[1] = '=' and remove it if it is;
+  if (expressionArray[1] == "=") {
+    expressionArray.shift();
+  }
+
   num1 = parseFloat(expressionArray[0]);
   operator = expressionArray[1];
   num2 = parseFloat(expressionArray[2]);
   answer = calculate(num1, operator, num2);
-}
-
-function convertNumStringToNum() {  
-  num1 = parseFloat(expressionArray[i - 1]);
-  operator = expressionArray[i];
-  num2 = parseFloat(expressionArray[i + 1]);
-  answer = calculate(num1, operator, num2);
+  outputBox.value = answer;
+  expressionArray.splice(0, 3);
+  console.log("expressionArray post splice: ", expressionArray);
+  expressionArray.unshift(answer);
+  console.log("expressionArray post push: ", expressionArray);
 }
 
 function calculate(num1, operator, num2) {
   switch (operator) {
     case "+":
-      answer = num1 + num2;
+      return num1 + num2;
       break;
 
     case "-":
-      answer = num1 - num2;
+      return num1 - num2;
       break;
 
     case "x":
-      answer = num1 * num2;
+      return num1 * num2;
       break;
 
     case "/":
-      answer = num1 / num2;
-  replace(answer, i);    
+      return num1 / num2;
+    default:
+      console.log("Something went wrong :-(");
   }
-console.log(answer);
- // replace(answer, i);
- console.log("array is " + expressionArray);
-  document.getElementById("output-box").value = answer;
-}
-
-function replace(answer, i) {
-console.log("i comes in as "+ i);
-  expressionArray.splice(i, 2);
-console.log("i-1 is " + i-1);
-  expressionArray[i-1] = answerCalc;
 }
 
 function clearOutputBox() {
@@ -110,4 +85,3 @@ function clearOutputBox() {
   expressionArray = [];
   numString = "";
 }
-
