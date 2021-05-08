@@ -34,4 +34,12 @@
     width: 50px;
 }
 
-
+.decimal { 
+    background:black;
+    border-radius: 8px;
+    color: white;
+    font-size: 36px;
+    padding: 3px;
+    text-align: center;
+    width: 50px;
+}
